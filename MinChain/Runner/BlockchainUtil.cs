@@ -19,8 +19,7 @@ namespace MinChain
             }
         }
 
-        public static Block LowestCommonAncestor(Block b1, Block b2,
-            Dictionary<ByteString, Block> blocks)
+        public static Block LowestCommonAncestor(Block b1, Block b2, Dictionary<ByteString, Block> blocks)
         {
             var set = new HashSet<ByteString>();
 

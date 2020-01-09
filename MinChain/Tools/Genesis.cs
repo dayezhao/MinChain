@@ -46,11 +46,9 @@ namespace MinChain
             var json = JsonConvert.SerializeObject(b, Formatting.Indented);
             WriteLine(json);
 
-            using (var fs = File.OpenWrite(args[1]))
-            {
-                fs.Write(b.Original, 0, b.Original.Length);
-                fs.Flush();
-            }
+            using var fs = File.OpenWrite(args[1]);
+            fs.Write(b.Original, 0, b.Original.Length);
+            fs.Flush();
         }
     }
 }

@@ -6,19 +6,13 @@ namespace MinChain
 {
     public static class BlockParameter
     {
-        public static ulong GetCoinbase(int height)
-        {
-            // 1000000 = 0b11110100001001000000
-            return height >= 2000 ? 0 :
-                1000000ul >> (height / 100);
-        }
+        // 1000000 = 0b11110100001001000000
+        public static ulong GetCoinbase(int height) => height >= 2000 ? 0 : 1000000ul >> (height / 100);
 
         public const int BlocksToConsiderDifficulty = 3;
-        public static readonly TimeSpan BlockInterval =
-            TimeSpan.FromSeconds(30);
+        public static readonly TimeSpan BlockInterval = TimeSpan.FromSeconds(30);
 
-        public static double GetNextDifficulty(
-            IEnumerable<Block> pastBlocks)
+        public static double GetNextDifficulty(IEnumerable<Block> pastBlocks)
         {
             var blocks = pastBlocks
                 .Take(BlocksToConsiderDifficulty + 1)

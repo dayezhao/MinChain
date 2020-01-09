@@ -11,7 +11,7 @@ namespace MinChain
     // Taken from https://msdn.microsoft.com/magazine/mt694089.aspx
     public static class Logging
     {
-        public static ILoggerFactory Factory { get; } = new LoggerFactory();
+        public static ILoggerFactory Factory { get; } = LoggerFactory.Create(builder => builder.AddConsole());
         public static ILogger Logger<T>() => Factory.CreateLogger<T>();
     }
 
@@ -28,8 +28,6 @@ namespace MinChain
 
         public static void Main(string[] args)
         {
-            Logging.Factory.AddConsole(LogLevel.Debug);
-
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
                 Converters = new List<JsonConverter>
@@ -51,6 +49,7 @@ namespace MinChain
                 goto ListCommands;
             }
 
+
             Action<string[]> func;
             var cmd = (args[0] ?? string.Empty).ToLower();
             if (!commands.TryGetValue(cmd, out func))
@@ -62,7 +61,7 @@ namespace MinChain
             func(args.Skip(1).ToArray());
             return;
 
-        ListCommands:
+            ListCommands:
             WriteLine("List of commands are:");
             commands.Keys.ToList().ForEach(name => WriteLine($"\t{name}"));
         }

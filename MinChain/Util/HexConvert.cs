@@ -13,7 +13,6 @@ namespace MinChain
             return ret;
         }
 
-        public static string FromBytes(byte[] bytes) =>
-            string.Join("", bytes.Select(b => $"{b:x2}"));
+        public static string FromBytes(byte[] bytes) => string.Join("", bytes.Select(b => $"{b:x2}"));
     }
 }

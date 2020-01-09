@@ -21,22 +21,19 @@ namespace MinChain
             return ret;
         }
 
-        public static Task WriteAsync(this Stream stream,
-            byte[] buffer, CancellationToken cancellationToken)
+        public static Task WriteAsync(this Stream stream, byte[] buffer, CancellationToken cancellationToken)
         {
             return stream.WriteAsync(buffer, 0, buffer.Length, cancellationToken);
         }
 
-        public static async Task<byte[]> ReadChunkAsync(this Stream stream,
-            CancellationToken cancellationToken)
+        public static async Task<byte[]> ReadChunkAsync(this Stream stream, CancellationToken cancellationToken)
         {
             var length = BitConverter.ToInt32(
                 await stream.ReadAsync(4, cancellationToken), 0);
             return await stream.ReadAsync(length, cancellationToken);
         }
 
-        public static async Task WriteChunkAsync(this Stream stream,
-            byte[] buffer, CancellationToken cancellationToken)
+        public static async Task WriteChunkAsync(this Stream stream, byte[] buffer, CancellationToken cancellationToken)
         {
             var length = BitConverter.GetBytes(buffer.Length);
             await stream.WriteAsync(length, cancellationToken);

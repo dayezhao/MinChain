@@ -11,10 +11,8 @@ namespace MinChain
         public const int MaximumBlockSize = 1024 * 1024; // 1MB
         public const int MaximumTransactionSize = 2 * 1024; // 2KB
 
-        public Dictionary<ByteString, byte[]> Blocks { get; }
-            = new Dictionary<ByteString, byte[]>();
-        public Dictionary<ByteString, Transaction> MemoryPool { get; }
-            = new Dictionary<ByteString, Transaction>();
+        public Dictionary<ByteString, byte[]> Blocks { get; } = new Dictionary<ByteString, byte[]>();
+        public Dictionary<ByteString, Transaction> MemoryPool { get; } = new Dictionary<ByteString, Transaction>();
 
         public ConnectionManager ConnectionManager { get; set; }
         public Executor Executor { get; set; }

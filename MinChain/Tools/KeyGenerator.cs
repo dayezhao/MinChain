@@ -11,14 +11,13 @@ namespace MinChain
             byte[] privateKey;
             EccService.GenerateKey(out privateKey, out publicKey);
 
-            var json = JsonConvert.SerializeObject(
-                new KeyPair
-                {
-                    PrivateKey = privateKey,
-                    PublicKey = publicKey,
-                    Address = BlockchainUtil.ToAddress(publicKey),
-                },
-                Formatting.Indented);
+            var keyPair = new KeyPair
+            {
+                PrivateKey = privateKey,
+                PublicKey = publicKey,
+                Address = BlockchainUtil.ToAddress(publicKey),
+            };
+            var json = JsonConvert.SerializeObject(keyPair, Formatting.Indented);
             Console.WriteLine(json);
         }
     }

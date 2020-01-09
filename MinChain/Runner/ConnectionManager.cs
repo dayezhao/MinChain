@@ -102,8 +102,7 @@ namespace MinChain
             listener.Stop();
         }
 
-        public async Task ConnectToAsync(
-            IPEndPoint endpoint, bool autoReconnect = false)
+        public async Task ConnectToAsync(IPEndPoint endpoint, bool autoReconnect = false)
         {
             var cl = new TcpClient(AddressFamily.InterNetwork);
             try { await cl.ConnectAsync(endpoint.Address, endpoint.Port); }
@@ -133,7 +132,7 @@ namespace MinChain
             }
         }
 
-        Task AddPeer(TcpClient peer)
+        private Task AddPeer(TcpClient peer)
         {
             var connectionInfo = new ConnectionInfo(peer);
 
@@ -201,7 +200,10 @@ namespace MinChain
                 await sendLock.WaitAsync(token);
                 await connection.Stream.WriteChunkAsync(bytes, token);
             }
-            finally { sendLock.Release(); }
+            finally
+            {
+                sendLock.Release();
+            }
         }
 
         public IEnumerable<EndPoint> GetPeers()

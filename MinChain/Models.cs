@@ -45,23 +45,21 @@ namespace MinChain
         [IgnoreMember, JsonIgnore]
         public double TotalDifficulty { get; set; }
 
-        public Block Clone() =>
-            new Block
-            {
-                Original = Original,
-                Id = Id,
-                PreviousHash = PreviousHash,
-                Difficulty = Difficulty,
-                Nonce = Nonce,
-                Timestamp = Timestamp,
-                TransactionRootHash = TransactionRootHash,
-                TransactionIds = TransactionIds?.ToList(),
-                Transactions = Transactions?.ToList(),
-                Height = Height,
-                ParsedTransactions = ParsedTransactions
-                    ?.Select(x => x.Clone()).ToArray(),
-                TotalDifficulty = TotalDifficulty,
-            };
+        public Block Clone() => new Block
+        {
+            Id = Id,
+            Nonce = Nonce,
+            Height = Height,
+            Original = Original,
+            PreviousHash = PreviousHash,
+            Difficulty = Difficulty,
+            Timestamp = Timestamp,
+            TotalDifficulty = TotalDifficulty,
+            TransactionRootHash = TransactionRootHash,
+            Transactions = Transactions?.ToList(),
+            TransactionIds = TransactionIds?.ToList(),
+            ParsedTransactions = ParsedTransactions?.Select(x => x.Clone()).ToArray(),
+        };
     }
 
     [MessagePackObject]
